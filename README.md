@@ -1,6 +1,15 @@
 # jQuery-ResponsiveFlipper
 Responsive flipper countdown
 
+## Demo
+https://codepen.io/ArtZ91/pen/ewVNJM
+
+## Features
+Font based flipper. Possible to change font css properties.
+Possible to add custom color schemes.
+Responsive width to parent container by font size fitting.
+Bootstrap modal compatible.
+
 ## Usage
 
 ```HTML
