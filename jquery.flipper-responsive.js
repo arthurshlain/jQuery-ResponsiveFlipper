@@ -308,6 +308,17 @@ jQuery(function($){
         }
 
         function animateFlipperDate($flipper, dateString){
+          
+            if(!$flipper.is(':visible')){
+              $flipper.addClass('flipper-invisible');
+              return;
+            }
+          
+            if($flipper.hasClass('flipper-invisible')){
+              $flipper.removeClass('flipper-invisible');
+              upsizeToParent($flipper, 1000);
+            }
+          
             var now = Date.now();
 
             var timestamp = Date.parse(formatFlipperDate(dateString));
