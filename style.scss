@@ -1,0 +1,214 @@
+$flipper_color1: #fff;
+$flipper_color2: #333;
+$digit_flip_time: .200s;
+$digit_face_radius: 0.1em;
+$digit_face_padding_x: 0.1em;
+$digit_face_padding_y: 0.1em;
+$digit_height: 1em + $digit_face_padding_y * 2;
+
+.flipper {
+  color: $flipper_color2;
+  display: block;
+  font-size: 50px;
+  line-height: 100%;
+  padding: 0;
+  margin: 0;
+  height: $digit_height + .5em;
+  &.flipper-invisible {
+    font-size: 0px !important;
+  }
+}
+
+.flipper-group {
+  position: relative;
+  white-space: nowrap;
+  display: block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  label {
+    position: absolute;
+    color: #fff;
+    font-size: 20%;
+    top: 100%;
+    line-height: 1em;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding-top: .5em;
+  }
+}
+
+.flipper-digit {
+  white-space: nowrap;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  float: left;
+  height: $digit_height;
+  overflow-y: hidden;
+  span {
+    font-size: 25%;
+  }
+}
+
+.flipper-delimiter {
+  white-space: nowrap;
+  display: block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  color: $flipper_color1;
+  min-width: .1em;
+  white-space: nowrap;
+  display: block;
+  padding-top: $digit_face_padding_y;
+  padding-bottom: $digit_face_padding_y;
+  line-height: 1em;
+}
+
+.digit-face {
+  display: block;
+  visibility: hidden;
+  position: relative;
+  border-radius: $digit_face_radius;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 8;
+  padding-top: $digit_face_padding_y;
+  padding-bottom: $digit_face_padding_y;
+  padding-left: $digit_face_padding_x;
+  padding-right: $digit_face_padding_x;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.digit-next {
+  display: block;
+  position: relative;
+  border-radius: $digit_face_radius;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 8;
+  height: $digit_height;
+  background: $flipper_color1;
+  padding-top: $digit_face_padding_y;
+  padding-bottom: $digit_face_padding_y;
+  padding-left: $digit_face_padding_x;
+  padding-right: $digit_face_padding_x;
+  box-sizing: border-box;
+  text-align: center;
+  user-select: none;
+}
+
+.digit-top {
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  backface-visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+  position: absolute;
+  background: $flipper_color1;
+  padding-top: $digit_face_padding_y;
+  padding-bottom: 0;
+  padding-left: $digit_face_padding_x;
+  padding-right: $digit_face_padding_x;
+  border-top-left-radius: $digit_face_radius;
+  border-top-right-radius: $digit_face_radius;
+  box-sizing: border-box;
+  text-align: center;
+  user-select: none;
+  transition: transform 0s linear,
+      background 0s linear;
+  transform-origin: 0 ($digit_height/2) 0 !important;
+  transform-style: preserve-3d !important;
+  z-index: 20;
+  &.r {
+    transition: transform ($digit_flip_time/2) linear,
+      background ($digit_flip_time/2) linear;
+    transform: rotateX(90deg);
+    background: darken($flipper_color1, 20%);
+  }
+}
+
+.digit-top2 {
+  visibility: hidden;
+  position: absolute;
+  height: 50%;
+  left: 0;
+  right: 0;
+  background: darken($flipper_color1, 20%);
+  transition: transform ($digit_flip_time/2) linear;
+  line-height: 0em !important;
+  top: 50% !important;
+  bottom: auto !important;
+  padding-top: 0;
+  padding-bottom: $digit_face_padding_y;
+  padding-left: $digit_face_padding_x;
+  padding-right: $digit_face_padding_x;
+  border-bottom-left-radius: $digit_face_radius;
+  border-bottom-right-radius: $digit_face_radius;
+  overflow: hidden;
+  text-align: center;
+  user-select: none;
+  transition: transform 0s linear,
+      background 0s linear;
+  transform: rotateX(-90deg);
+  transform-style: preserve-3d !important;
+  transform-origin: 0 0 0 !important;
+  z-index: 20;
+  &.r {
+    visibility: visible;
+    transition: transform ($digit_flip_time/2) linear ($digit_flip_time/2),
+      background ($digit_flip_time/2) linear ($digit_flip_time/2);
+    transform: rotateX(0deg);
+    background: $flipper_color1;
+  }
+}
+
+.digit-bottom {
+  backface-visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  overflow: hidden;
+  background: #fff;
+  height: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  line-height: 0em;
+  padding-top: 0;
+  padding-bottom: $digit_face_padding_y;
+  padding-left: $digit_face_padding_x;
+  padding-right: $digit_face_padding_x;
+  border-bottom-left-radius: $digit_face_radius;
+  border-bottom-right-radius: $digit_face_radius;
+  box-sizing: border-box;
+  text-align: center;
+  transition: none;
+  &.r {
+    transition: background ($digit_flip_time/2) linear;
+    background: darken($flipper_color1, 20%);
+  }
+}
+
+.flipper-digit:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  display: block;
+  z-index: 30;
+  left: 0;
+  right: 0;
+}
