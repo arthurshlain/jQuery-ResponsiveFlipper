@@ -29,3 +29,7 @@ Bootstrap modal compatible.
 $('#myFlipper').flipper('init');
 ```
 
+## Compatibility
+
+- Chrome
+- Edge
