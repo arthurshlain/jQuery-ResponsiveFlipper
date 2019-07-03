@@ -62,7 +62,7 @@ jQuery(function($){
       // defaults.
       reverse: $flipper.data('reverse') || false, 
       datetime: $flipper.data('datetime') || 'now',
-      template: $flipper.data('template') || 'ddd:HH:ii:ss',
+      template: $flipper.data('template') || 'HH:ii:ss',
       labels: $flipper.data('labels') || 'Days|Hours|Minutes|Seconds',
       preload: true
     }, options );
