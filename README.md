@@ -31,6 +31,37 @@ Bootstrap modal compatible.
 </script>
 ```
 
+## Data attributes
+
+### reverse (default false) - enable countdown mode
+
+### datetime (default 'now') - target date
+
+### labels (default 'Hours|Minutes|Seconds') - digit groups captions
+
+### template (default 'HH:ii:ss')
+
+`|` - delimiter `[:]`
+
+`ddd` - "days left", three sections `[0][0][0]`-`[9][9][9]`
+
+`dd` - "days left" or date, two sections `[0][0]`-`[9][9]`
+
+`HH` - hours, two sections `[0][0]`-`[2][3]`
+
+`ii` - minutes, two sections `[0][0]`-`[5][9]`
+
+`ss` - seconds, two sections `[0][0]`-`[5][9]`
+
+`d` - date, two digits, one section `[00]`-`[31]`
+
+`H` - hours, two digits, one section `[00]`-`[23]`
+
+`i` - minutes, two digits, one section `[00]`-`[59]`
+
+`s` - seconds, two digits, one section `[00]`-`[59]`
+
+
 ## Compatibility
 
 - Chrome
