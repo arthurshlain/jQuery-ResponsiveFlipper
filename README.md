@@ -45,7 +45,7 @@ Bootstrap modal compatible.
 
 `ddd` - "days left", three sections `[0][0][0]`-`[9][9][9]`
 
-`dd` - "days left" or date, two sections `[0][0]`-`[9][9]`
+`dd` - "days left" or "date of month", two sections `[0][0]`-`[9][9]`
 
 `HH` - hours, two sections `[0][0]`-`[2][3]`
 
@@ -53,7 +53,7 @@ Bootstrap modal compatible.
 
 `ss` - seconds, two sections `[0][0]`-`[5][9]`
 
-`d` - date, two digits, one section `[00]`-`[31]`
+`d` - "date of month", two digits, one section `[00]`-`[31]`
 
 `H` - hours, two digits, one section `[00]`-`[23]`
 
