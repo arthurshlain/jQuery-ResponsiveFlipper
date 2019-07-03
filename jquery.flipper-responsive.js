@@ -89,6 +89,10 @@ jQuery(function($){
         if(typeof labelsArray[index] !== 'undefined'){
           $part.append('<label>' + labelsArray[index] + '</label>');
         }
+        if(part === 'd' || part === 'H' || part === 'i' || part === 's'){
+          var rev = settings.reverse ? 'reverse' : '';
+          $part.append('<div class="flipper-digit ' + rev + '"></div>');
+        }
         if(part === 'dd' || part === 'ddd' || part === 'HH' || part === 'ii' || part === 'ss'){
           var rev = settings.reverse ? 'reverse' : '';
           $part.append('<div class="flipper-digit ' + rev + '"></div>');
@@ -97,6 +101,24 @@ jQuery(function($){
           if(part === 'ddd'){
             $part.append('<div class="flipper-delimiter"></div>');
             $part.append('<div class="flipper-digit ' + rev + '"></div>');
+          }
+        }
+        if(part === 'd'){
+          for(n = 0; n <= 31; n++){
+            $part.find('.flipper-digit:eq(0)').append('<div class="digit-face">' + n + '</div>');
+            $part.find('.flipper-digit:eq(1)').append('<div class="digit-face">' + n + '</div>');
+          }
+        }
+        if(part === 'H'){
+          for(n = 0; n <= 23; n++){
+            $part.find('.flipper-digit:eq(0)').append('<div class="digit-face">' + n + '</div>');
+            $part.find('.flipper-digit:eq(1)').append('<div class="digit-face">' + n + '</div>');
+          }
+        }
+        if(part === 'i' || part === 's'){
+          for(n = 0; n <= 59; n++){
+            $part.find('.flipper-digit:eq(0)').append('<div class="digit-face">' + n + '</div>');
+            $part.find('.flipper-digit:eq(1)').append('<div class="digit-face">' + n + '</div>');
           }
         }
         if(part === 'dd' || part === 'ddd'){
@@ -126,7 +148,6 @@ jQuery(function($){
         }
       });
 
-      setFlipperZero($flipper);
       if(settings.preload){
         setFlipperDate($flipper, settings.datetime, false);
       }
@@ -135,9 +156,9 @@ jQuery(function($){
         setFlipperDate($flipper, settings.datetime, true);
       }, 1000);
 
-      upsizeToParent($flipper, 1000);
+      upsizeToParent($flipper);
       $(window).on("resize", function(){
-        upsizeToParent($flipper, 1000);
+        upsizeToParent($flipper);
       });
     }
 
@@ -185,19 +206,18 @@ jQuery(function($){
         $currentTop.html(next).hide();
         $currentTop2.html(next);
         setTimeout(function(){
-          $currentTop2.html(next);
-          $currentBottom.html(next);
+          $currentBottom.html(next).removeClass('r');
           $currentTop.removeClass('r').show();
-          $currentTop2.removeClass('r');
-          $currentBottom.removeClass('r');
+          $currentTop2.html(next).removeClass('r');
           $digit.removeClass('r');
         }, flipTime/2);
       }, flipTime/2);
     }
 
-    function upsizeToParent($flipper, maxFontSize) {
+    function upsizeToParent($flipper) {
       var parentWidth;
       var flipperWidth;
+      var maxFontSize = 1000;
       var fontSize = maxFontSize;
       var i = 0;
       var minFontSize = 0;
@@ -211,7 +231,7 @@ jQuery(function($){
           var w = parseFloat($(this).outerWidth());
           flipperWidth += w;
         });
-        if((parentWidth - flipperWidth) < 10 && (parentWidth - flipperWidth) > 0){
+        if((parentWidth - flipperWidth) < 4 && (parentWidth - flipperWidth) > 0){
           $flipper.css('width', '');
           return;
         }
@@ -250,20 +270,6 @@ jQuery(function($){
       });
     }, flipTime / 4);
 
-    function setFlipperZero($flipper){
-      $flipper.find('.flipper-dd').find('.flipper-digit:eq(0) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-dd').find('.flipper-digit:eq(1) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ddd').find('.flipper-digit:eq(0) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ddd').find('.flipper-digit:eq(1) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ddd').find('.flipper-digit:eq(2) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-HH').find('.flipper-digit:eq(0) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-HH').find('.flipper-digit:eq(1) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ii').find('.flipper-digit:eq(0) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ii').find('.flipper-digit:eq(1) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ss').find('.flipper-digit:eq(0) .digit-face:contains(0)').addClass('active');
-      $flipper.find('.flipper-ss').find('.flipper-digit:eq(1) .digit-face:contains(0)').addClass('active');
-    }
-
     function formatFlipperDate(dateStr) {
       var a=dateStr.split(" ");
       var d=a[0].split("-");
@@ -288,20 +294,16 @@ jQuery(function($){
     }
 
     function setFlipperDate($flipper, dateString, animate){
-
       var animate = animate || false;
-
       if(!$flipper.is(':visible')){
         $flipper.addClass('flipper-invisible');
         return;
       }
-
       if($flipper.hasClass('flipper-invisible')){
         $flipper.removeClass('flipper-invisible');
-        upsizeToParent($flipper, 1000);
+        upsizeToParent($flipper);
         setFlipperDate($flipper, settings.datetime, false);
       }
-
       var now = Date.now();
       if(dateString === 'now'){
         var now = new Date();
@@ -328,32 +330,51 @@ jQuery(function($){
       var seconds_str = seconds.toString().padStart(2, '0');
 
       if(animate){
+        // one section
+        $flipper.find('.flipper-d').find('.flipper-digit:eq(0)').attr('data-value', days);
+        $flipper.find('.flipper-H').find('.flipper-digit:eq(0)').attr('data-value', hours);
+        $flipper.find('.flipper-i').find('.flipper-digit:eq(0)').attr('data-value', minutes);
+        $flipper.find('.flipper-s').find('.flipper-digit:eq(0)').attr('data-value', seconds);
+        
+        // two sections
         $flipper.find('.flipper-dd').find('.flipper-digit:eq(0)').attr('data-value', days_str[1]);
         $flipper.find('.flipper-dd').find('.flipper-digit:eq(1)').attr('data-value', days_str[2]);
-        $flipper.find('.flipper-ddd').find('.flipper-digit:eq(0)').attr('data-value', days_str[0]);
-        $flipper.find('.flipper-ddd').find('.flipper-digit:eq(1)').attr('data-value', days_str[1]);
-        $flipper.find('.flipper-ddd').find('.flipper-digit:eq(2)').attr('data-value', days_str[2]);
         $flipper.find('.flipper-HH').find('.flipper-digit:eq(0)').attr('data-value', hours_str[0]);
         $flipper.find('.flipper-HH').find('.flipper-digit:eq(1)').attr('data-value', hours_str[1]);
         $flipper.find('.flipper-ii').find('.flipper-digit:eq(0)').attr('data-value', minutes_str[0]);
         $flipper.find('.flipper-ii').find('.flipper-digit:eq(1)').attr('data-value', minutes_str[1]);
         $flipper.find('.flipper-ss').find('.flipper-digit:eq(0)').attr('data-value', seconds_str[0]);
         $flipper.find('.flipper-ss').find('.flipper-digit:eq(1)').attr('data-value', seconds_str[1]);
+        
+        // three sections
+        $flipper.find('.flipper-ddd').find('.flipper-digit:eq(0)').attr('data-value', days_str[0]);
+        $flipper.find('.flipper-ddd').find('.flipper-digit:eq(1)').attr('data-value', days_str[1]);
+        $flipper.find('.flipper-ddd').find('.flipper-digit:eq(2)').attr('data-value', days_str[2]);
       }
       else {
         $flipper.find('.flipper-group .flipper-digit').removeAttr('data-value');
         $flipper.find('.digit-face.active').removeClass('active');
+        
+        // one section
+        $flipper.find('.flipper-d .flipper-digit:eq(0) .digit-face:contains(' + days + ')').addClass('active');
+        $flipper.find('.flipper-H .flipper-digit:eq(0) .digit-face:contains(' + hours + ')').addClass('active');
+        $flipper.find('.flipper-i .flipper-digit:eq(0) .digit-face:contains(' + minutes + ')').addClass('active');
+        $flipper.find('.flipper-s .flipper-digit:eq(0) .digit-face:contains(' + seconds + ')').addClass('active');
+        
+        // two sections
         $flipper.find('.flipper-dd .flipper-digit:eq(0) .digit-face:contains(' + days_str[1] + ')').addClass('active');
         $flipper.find('.flipper-dd .flipper-digit:eq(1) .digit-face:contains(' + days_str[2] + ')').addClass('active');
-        $flipper.find('.flipper-ddd .flipper-digit:eq(0) .digit-face:contains(' + days_str[0] + ')').addClass('active');
-        $flipper.find('.flipper-ddd .flipper-digit:eq(1) .digit-face:contains(' + days_str[1] + ')').addClass('active');
-        $flipper.find('.flipper-ddd .flipper-digit:eq(2) .digit-face:contains(' + days_str[2] + ')').addClass('active');
         $flipper.find('.flipper-HH .flipper-digit:eq(0) .digit-face:contains(' + hours_str[0] + ')').addClass('active');
         $flipper.find('.flipper-HH .flipper-digit:eq(1) .digit-face:contains(' + hours_str[1] + ')').addClass('active');
         $flipper.find('.flipper-ii .flipper-digit:eq(0) .digit-face:contains(' + minutes_str[0] + ')').addClass('active');
         $flipper.find('.flipper-ii .flipper-digit:eq(1) .digit-face:contains(' + minutes_str[1] + ')').addClass('active');
         $flipper.find('.flipper-ss .flipper-digit:eq(0) .digit-face:contains(' + seconds_str[0] + ')').addClass('active');
         $flipper.find('.flipper-ss .flipper-digit:eq(1) .digit-face:contains(' + seconds_str[1] + ')').addClass('active');
+        
+        // three sections
+        $flipper.find('.flipper-ddd .flipper-digit:eq(0) .digit-face:contains(' + days_str[0] + ')').addClass('active');
+        $flipper.find('.flipper-ddd .flipper-digit:eq(1) .digit-face:contains(' + days_str[1] + ')').addClass('active');
+        $flipper.find('.flipper-ddd .flipper-digit:eq(2) .digit-face:contains(' + days_str[2] + ')').addClass('active');
         addAppearance($flipper);
       }
 
