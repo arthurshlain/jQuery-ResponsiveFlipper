@@ -1,3 +1,8 @@
+body {
+  background: #333;
+  font-family: sans-serif;
+}
+
 .flipper {
   color: #333;
   display: block;
@@ -136,9 +141,9 @@
   z-index: 20;
 }
 .digit-top.r {
-  transition: background 0.1s linear, -webkit-transform 0.1s linear;
-  transition: transform 0.1s linear, background 0.1s linear;
-  transition: transform 0.1s linear, background 0.1s linear, -webkit-transform 0.1s linear;
+  transition: background 0.2s linear, -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear, background 0.2s linear;
+  transition: transform 0.2s linear, background 0.2s linear, -webkit-transform 0.2s linear;
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
   background: #cccccc;
@@ -151,9 +156,9 @@
   left: 0;
   right: 0;
   background: #cccccc;
-  transition: -webkit-transform 0.1s linear;
-  transition: transform 0.1s linear;
-  transition: transform 0.1s linear, -webkit-transform 0.1s linear;
+  transition: -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear;
+  transition: transform 0.2s linear, -webkit-transform 0.2s linear;
   line-height: 0em !important;
   top: 50% !important;
   bottom: auto !important;
@@ -182,9 +187,9 @@
 }
 .digit-top2.r {
   visibility: visible;
-  transition: background 0.1s linear 0.1s, -webkit-transform 0.1s linear 0.1s;
-  transition: transform 0.1s linear 0.1s, background 0.1s linear 0.1s;
-  transition: transform 0.1s linear 0.1s, background 0.1s linear 0.1s, -webkit-transform 0.1s linear 0.1s;
+  transition: background 0.2s linear 0.2s, -webkit-transform 0.2s linear 0.2s;
+  transition: transform 0.2s linear 0.2s, background 0.2s linear 0.2s;
+  transition: transform 0.2s linear 0.2s, background 0.2s linear 0.2s, -webkit-transform 0.2s linear 0.2s;
   -webkit-transform: rotateX(0deg);
           transform: rotateX(0deg);
   background: #fff;
@@ -214,7 +219,7 @@
   transition: none;
 }
 .digit-bottom.r {
-  transition: background 0.1s linear;
+  transition: background 0.2s linear;
   background: #cccccc;
 }
 
@@ -228,4 +233,33 @@
   z-index: 30;
   left: 0;
   right: 0;
+}
+
+.flipper-dark {
+  color: #fff;
+}
+.flipper-dark .flipper-delimiter {
+  color: #333;
+}
+.flipper-dark .digit-next {
+  background: #333;
+}
+.flipper-dark .digit-top {
+  background: #333;
+}
+.flipper-dark .digit-top.r {
+  background: black;
+}
+.flipper-dark .digit-top2 {
+  background: black;
+}
+.flipper-dark .digit-top2.r {
+  background: #333;
+}
+.flipper-dark .digit-bottom {
+  background: #333;
+}
+
+.flipper-dark-labels .flipper-group label {
+  color: #333;
 }
