@@ -35,4 +35,5 @@ Bootstrap modal compatible.
 
 - Chrome
 - Safari
-- Edge (animation issues)
+- Edge 
+- IE11 (broken animation)
