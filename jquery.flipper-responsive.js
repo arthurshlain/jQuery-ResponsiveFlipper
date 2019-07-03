@@ -231,7 +231,7 @@ jQuery(function($){
           var w = parseFloat($(this).outerWidth());
           flipperWidth += w;
         });
-        if((parentWidth - flipperWidth) < 4 && (parentWidth - flipperWidth) > 0){
+        if((parentWidth - flipperWidth) < 10 && (parentWidth - flipperWidth) > 0){
           $flipper.css('width', '');
           return;
         }
