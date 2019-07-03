@@ -212,3 +212,36 @@ $digit_height: 1em + $digit_face_padding_y * 2;
   left: 0;
   right: 0;
 }
+
+.flipper-dark {
+  color: $flipper_color1;
+  .flipper-delimiter {
+    color: $flipper_color2;
+  }
+  .digit-next {
+    background: $flipper_color2;
+  }
+  .digit-top {
+    background: $flipper_color2;
+    &.r {
+      background: darken($flipper_color2, 20%);
+    }
+  }
+  .digit-top2 {
+    background: darken($flipper_color2, 20%);
+    &.r {
+      background: $flipper_color2;
+    }
+  }
+  .digit-bottom {
+    background: $flipper_color2;
+  }
+}
+
+.flipper-dark-labels {
+  .flipper-group {
+    label {
+      color: $flipper_color2;
+    }
+  }
+}
