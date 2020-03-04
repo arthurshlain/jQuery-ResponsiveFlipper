@@ -33,13 +33,13 @@ Bootstrap modal compatible.
 
 ## Data attributes
 
-### reverse (default false) - enable countdown mode
+`reverse` (default false) - enable countdown mode
 
-### datetime (default 'now') - target date
+`datetime` (default 'now') - target date
 
-### labels (default 'Hours|Minutes|Seconds') - digit groups captions
+`labels` (default 'Hours|Minutes|Seconds') - digit groups captions
 
-### template (default 'HH:ii:ss')
+`template` (default 'HH:ii:ss')
 
 `|` - delimiter `[:]`
 
