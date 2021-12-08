@@ -67,8 +67,6 @@ jQuery(function($){
       preload: true
     }, options );
 
-    console.log(settings.reverse);
-
     if(action === 'init'){
       if($flipper.hasClass('flipper-initialized')){
         console.warn('Flipper already initialized.');
