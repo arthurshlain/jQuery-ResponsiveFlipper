@@ -60,11 +60,3 @@ Bootstrap modal compatible.
 `i` - minutes, two digits, one section `[00]`-`[59]`
 
 `s` - seconds, two digits, one section `[00]`-`[59]`
-
-
-## Compatibility
-
-- Chrome
-- Safari
-- Edge 
-- IE11 (broken animation)
