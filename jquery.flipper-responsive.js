@@ -157,7 +157,6 @@ jQuery(function($){
           date.setSeconds(date.getSeconds() + 1);
           var iso = date.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
           settings.datetime = iso[1] + ' ' + iso[2];
-          console.log(settings.datetime);
         }
         
         setFlipperDate($flipper, settings.datetime, true, settings.reverse);
