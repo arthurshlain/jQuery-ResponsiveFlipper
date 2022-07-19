@@ -147,11 +147,20 @@ jQuery(function($){
       });
 
       if(settings.preload){
-        setFlipperDate($flipper, settings.datetime, false);
+        setFlipperDate($flipper, settings.datetime, false, settings.reverse);
       }
 
       setInterval(function(){
-        setFlipperDate($flipper, settings.datetime, true);
+        
+        if(settings.datetime !== 'now' && !settings.reverse){
+          var date = new Date(settings.datetime.replace(/-/g, "/") + ' GMT+0');
+          date.setSeconds(date.getSeconds() + 1);
+          var iso = date.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+          settings.datetime = iso[1] + ' ' + iso[2];
+          console.log(settings.datetime);
+        }
+        
+        setFlipperDate($flipper, settings.datetime, true, settings.reverse);
       }, 1000);
 
       upsizeToParent($flipper);
@@ -291,7 +300,7 @@ jQuery(function($){
       });
     }
 
-    function setFlipperDate($flipper, dateString, animate){
+    function setFlipperDate($flipper, dateString, animate, reverse){
       var animate = animate || false;
       if(!$flipper.is(':visible')){
         $flipper.addClass('flipper-invisible');
@@ -300,7 +309,7 @@ jQuery(function($){
       if($flipper.hasClass('flipper-invisible')){
         $flipper.removeClass('flipper-invisible');
         upsizeToParent($flipper);
-        setFlipperDate($flipper, settings.datetime, false);
+        setFlipperDate($flipper, settings.datetime, false, reverse);
       }
       var now = Date.now();
       if(dateString === 'now'){
@@ -309,6 +318,13 @@ jQuery(function($){
         var minutes = now.getMinutes();
         var hours = now.getHours();
         var days = now.getDate();
+      }
+      else if(!reverse){
+        var date = new Date(dateString);
+        var seconds = date.getSeconds();
+        var minutes = date.getMinutes();
+        var hours = date.getHours();
+        var days = date.getDate();
       }
       else {
         var timestamp = Date.parse(formatFlipperDate(dateString));
